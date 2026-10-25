@@ -1,0 +1,613 @@
+/* Tema claro (padrão) */
+:root {
+  --fundo: #f4f5f7;
+  --superficie: #ffffff;
+  --borda: #e2e5ea;
+  --texto: #1b1f24;
+  --texto-suave: #5c6570;
+  --destaque: #2f6fdf;
+  --cor-13: #d7322b;
+  --cor-22: #1d5fc4;
+  --cor-outro: #7a7f87;
+  --cor-branco: #c9ced6;
+  --cor-nulo: #959ca6;
+  --cor-vazio: #dfe3e8;
+  --sucesso: #1d9a5b;
+  --alerta-fundo: #fff4d6;
+  --alerta-texto: #6b4e00;
+  --erro-fundo: #fde7e6;
+  --erro-texto: #8a1c16;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.06), 0 2px 8px rgb(0 0 0 / 0.04);
+  color-scheme: light;
+}
+
+/* Tema escuro: segue o sistema, a menos que o usuário escolha o claro */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --fundo: #0f1216;
+    --superficie: #181c22;
+    --borda: #2a3039;
+    --texto: #e9edf2;
+    --texto-suave: #9aa4b1;
+    --destaque: #6b9cff;
+    --cor-13: #f05a52;
+    --cor-22: #4d8af0;
+    --cor-outro: #9aa0a8;
+    --cor-branco: #4a525d;
+    --cor-nulo: #6b7480;
+    --cor-vazio: #2a3039;
+    --alerta-fundo: #3a2f0e;
+    --alerta-texto: #f5d98a;
+    --erro-fundo: #3d1a18;
+    --erro-texto: #f6b4ae;
+    --sombra: none;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --fundo: #0f1216;
+  --superficie: #181c22;
+  --borda: #2a3039;
+  --texto: #e9edf2;
+  --texto-suave: #9aa4b1;
+  --destaque: #6b9cff;
+  --cor-13: #f05a52;
+  --cor-22: #4d8af0;
+  --cor-outro: #9aa0a8;
+  --cor-branco: #4a525d;
+  --cor-nulo: #6b7480;
+  --cor-vazio: #2a3039;
+  --alerta-fundo: #3a2f0e;
+  --alerta-texto: #f5d98a;
+  --erro-fundo: #3d1a18;
+  --erro-texto: #f6b4ae;
+  --sombra: none;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--destaque);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.pagina {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+/* Cabeçalho */
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 0 16px;
+}
+
+.sobretitulo {
+  margin: 0 0 2px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-suave);
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.cabecalho-acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--borda);
+  background: var(--superficie);
+}
+
+.ponto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.selo-vivo {
+  color: var(--cor-13);
+}
+
+.selo-vivo .ponto {
+  animation: pulsar 1.6s ease-in-out infinite;
+}
+
+.selo-final {
+  color: var(--sucesso);
+}
+
+.selo-instavel {
+  color: var(--alerta-texto);
+}
+
+@keyframes pulsar {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selo-vivo .ponto { animation: none; }
+}
+
+.consultado {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.botao-icone {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--borda);
+  background: var(--superficie);
+  color: var(--texto);
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+}
+
+.botao-icone:hover {
+  border-color: var(--texto-suave);
+}
+
+/* Estrutura */
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--sombra);
+  min-width: 0;
+}
+
+.grade {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .grade {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.detalhe {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.centro {
+  text-align: center;
+}
+
+.carregando {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+/* Avisos */
+.aviso {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.aviso-mock {
+  background: var(--alerta-fundo);
+  color: var(--alerta-texto);
+}
+
+.aviso-erro {
+  background: var(--erro-fundo);
+  color: var(--erro-texto);
+}
+
+/* Progresso */
+.progresso-topo {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.progresso-valor {
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.progresso-rotulo {
+  color: var(--texto-suave);
+}
+
+.barra {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--cor-vazio);
+  overflow: hidden;
+}
+
+.barra-preenchida {
+  height: 100%;
+  background: var(--destaque);
+  border-radius: inherit;
+  transition: width 0.6s ease;
+}
+
+/* Candidatos */
+.candidatos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.candidato {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  border-left: 4px solid var(--cor);
+  background: color-mix(in srgb, var(--cor) 6%, transparent);
+}
+
+.foto {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--cor);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.candidato-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.candidato-nome {
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.candidato-partido {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.etiqueta-eleito {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--sucesso);
+  color: #fff;
+}
+
+.candidato-numeros {
+  text-align: right;
+}
+
+.candidato-pct {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--cor);
+  font-variant-numeric: tabular-nums;
+}
+
+.candidato-votos {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Barra de disputa direta */
+.cabo {
+  position: relative;
+  display: flex;
+  height: 14px;
+  margin-top: 16px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.cabo-a {
+  transition: width 0.6s ease;
+}
+
+.cabo-b {
+  flex: 1;
+}
+
+.cabo-meio {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--superficie);
+}
+
+/* Gráfico */
+.grafico {
+  position: relative;
+  height: 260px;
+}
+
+/* Resumo */
+.resumo {
+  margin: 0;
+}
+
+.resumo-linha {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.resumo-linha:last-child {
+  border-bottom: none;
+}
+
+.resumo dt {
+  color: var(--texto-suave);
+}
+
+.resumo dd {
+  margin: 0;
+  display: flex;
+  gap: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.resumo-pct {
+  min-width: 64px;
+  text-align: right;
+  color: var(--texto-suave);
+  font-weight: 400;
+}
+
+/* Mapa */
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+}
+
+.legenda-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legenda-cor {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+
+.mapa-area {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .mapa-area {
+    grid-template-columns: minmax(0, 1.3fr) 1fr;
+    align-items: start;
+  }
+}
+
+.mapa-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mapa-topo h2 {
+  margin: 0;
+}
+
+.alternador {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+}
+
+.alternador button {
+  border: none;
+  background: transparent;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 5px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.alternador button.ativo {
+  background: var(--superficie);
+  color: var(--texto);
+  font-weight: 600;
+  box-shadow: var(--sombra);
+}
+
+.mapa-svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.uf-forma {
+  fill: var(--preenchimento);
+  stroke: var(--superficie);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  cursor: pointer;
+  /* troca de cor suave quando o líder muda */
+  transition: fill 0.8s ease, opacity 0.2s;
+  outline: none;
+}
+
+/* No modo regiões, as divisas entre estados ficam discretas e o nome da região aparece */
+.modo-regioes .uf-forma {
+  stroke-opacity: 0.3;
+}
+
+.rotulo-regiao {
+  fill: #fff;
+  stroke: rgb(0 0 0 / 0.45);
+  stroke-width: 3px;
+  paint-order: stroke;
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.uf-forma:hover {
+  opacity: 0.82;
+}
+
+.uf-forma.selecionada,
+.uf-forma:focus-visible {
+  stroke: var(--texto);
+  stroke-width: 2.5;
+}
+
+.titulo-regioes {
+  margin-top: 18px;
+}
+
+.mini-votos {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mapa-detalhe h3 {
+  font-size: 1rem;
+}
+
+.mini-lista {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.mini-lista li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.mini-nome {
+  flex: 1;
+}
+
+/* Rodapé */
+.rodape {
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  h1 { font-size: 1.25rem; }
+  .candidato-pct { font-size: 1.3rem; }
+  .foto { width: 46px; height: 46px; }
+}
